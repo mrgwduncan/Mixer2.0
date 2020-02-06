@@ -43,11 +43,16 @@ span {
 
 .footer {
   width: 100%;
-  height: 250px;
+  height: 50px;
   color: whitesmoke;
   position: fixed;
   left: 0;
   bottom: 0;
   text-align: center;
   background-color: black;
+}
+
+.search {
+  color: white;
+  text-align: center;
 }

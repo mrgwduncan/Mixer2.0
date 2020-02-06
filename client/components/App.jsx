@@ -10,7 +10,7 @@ import SearchName from './searchByName/SearchName.jsx'
 const App = () => {
   return (
     <div>
-      {/* <Header />
+      <Header />
       
       <SearchIngredient />
       <SearchName />
@@ -19,7 +19,7 @@ const App = () => {
       <RandomDrink />
 
 
-      <Footer /> */}
+      <Footer />
 
     </div>
   )

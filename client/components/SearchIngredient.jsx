@@ -23,7 +23,7 @@ class SearchIngredient extends React.Component {
   };
   render() {
     return (
-      <section>
+      <div className="search">
         <form action="/" method="POST" onSubmit={this.handleSubmit}>
           <label>Search by ingredient: &nbsp; </label>
           <input
@@ -37,7 +37,7 @@ class SearchIngredient extends React.Component {
         {this.state.drinks && (
           <SearchIngredientResults data={this.state.drinks} />
         )}
-      </section>
+      </div>
     );
   }
 }
