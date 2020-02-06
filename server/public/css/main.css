@@ -1,9 +1,46 @@
+
+*, html {
+  box-sizing: border-box;
+}
+
 body {
-  background-color: blanchedalmond;
+  background-color: #34495e;
+  margin: 0;
 }
 li {
   list-style-type: none;
 }
 span {
+
+}
+
+.header {
+  height: 260px;
+  width: 100%;
+  background-color: black;
+  color: #f000ff;
+  text-align: center;
+  font-size: 100px;
+  font-family: 'Megrim', cursive;
+  color: #FFFFFF;
+  text-shadow: #FFF 0px 0px 5px, #FFF 0px 0px 10px, #FFF 0px 0px 15px, #FF2D95 0px 0px 20px, #FF2D95 0px 0px 30px, #FF2D95 0px 0px 40px, #FF2D95 0px 0px 50px, #FF2D95 0px 0px 75px;
+  padding: 40px 20px;
+  
+}
+
+.header p {
+  margin: 0;
+}
+
+
+.logo {
+  height: 80px;
+  width: 80px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  
+  
+  
 
 }
