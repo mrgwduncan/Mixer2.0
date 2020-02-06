@@ -11,3 +11,8 @@ export function getCocktailbyId(id) {
     .get(cocktails + "lookup.php?i=" + id)
     .then(response => response.body);
 }
+export function getCocktailByName(name) {
+  return request
+    .get(cocktails + 'search.php?s=' + name)
+    .then(response => response.body)
+}
