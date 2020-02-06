@@ -1,8 +1,10 @@
 import React from 'react'
-
+import SearchIngredient from './SearchIngredient.jsx'
 const App = () => {
   return (
-    <h1>React development has begun!</h1>
+    <div>
+      <SearchIngredient />
+    </div>
   )
 }
 
