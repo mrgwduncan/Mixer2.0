@@ -2,6 +2,7 @@ import React from 'react'
 
 
 import SearchIngredient from './SearchIngredient.jsx'
+import RandomDrink from './RandomDrink'
 import SearchName from './searchByName/SearchName.jsx'
 
 const App = () => {
@@ -9,6 +10,8 @@ const App = () => {
     <div>
       <SearchIngredient />
       <SearchName />
+      <RandomDrink />
+
     </div>
   )
 }
