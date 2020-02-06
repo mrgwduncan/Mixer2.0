@@ -6,6 +6,7 @@ class ResultsName extends React.Component {
   }
 
   render() {
+    console.log('results', this.props.data)
     return(
       <section>
         
