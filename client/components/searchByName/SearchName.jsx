@@ -2,6 +2,8 @@ import React from 'react'
 
 import {getCocktailByName} from '../../api'
 
+import ResultsName from '../searchByName/ResultsName'
+
 class SearchName extends React.Component {
   constructor(props) {
     super(props)
@@ -9,7 +11,7 @@ class SearchName extends React.Component {
     this.state = {
       loading: false,
       searchTerm: '',
-      currentCocktail: null,
+      currentCocktails: null,
       drinksFound: false
     }
   }
@@ -18,10 +20,10 @@ class SearchName extends React.Component {
     console.log("Submitted.")
     e.preventDefault();
     getCocktailByName(this.state.searchTerm)
-    .then(cocktail => {
-      console.log(cocktail)
+    .then(cocktails => {
+      console.log(cocktails)
       this.setState({
-        currentCocktail: cocktail,
+        currentCocktails: cocktails,
         drinksFound: true
       })
     })
@@ -38,7 +40,7 @@ class SearchName extends React.Component {
   render() {
 
     return(
-      <React.fragment>
+      <React.Fragment>
         <div className="search">
           <form onSubmit={this.handleSubmit}>  
             <label> Search by name: &nbsp; </label>
@@ -46,10 +48,10 @@ class SearchName extends React.Component {
             <input type="submit"  />
           </form>
         </div>
-
-        
-
-      </React.fragment>
+        {this.state.drinksFound && (
+          <ResultsName data={this.state.currentCocktails} />
+        )}
+      </React.Fragment>
       
     )
   }

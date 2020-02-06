@@ -8,8 +8,10 @@ class ResultsName extends React.Component {
   render() {
     return(
       <section>
-        <h3> If it ain't me, chippie-dee.</h3>
+        
       </section>
     )
   }
 }
+
+export default ResultsName
