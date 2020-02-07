@@ -11,6 +11,10 @@ import {getCocktailByName} from '../api.js'
 import ResultsName from './searchByName/ResultsName.jsx'
 
 import {searchByIngredient} from '../api.js'
+import SearchIngredientResults from './SearchIngredientResults'
+
+import {getRandoCocktail} from '../api'
+import RandomDrinkDisplay from './RandomDrinkDisplay'
 
 class App extends React.Component {
   constructor(props) {
@@ -29,7 +33,10 @@ class App extends React.Component {
       //ingredient state properties
       ingredientResult: null,
       ingSearch: '',
-      ingCocktailsList: null
+      ingCocktailsList: null,
+
+      //random state results
+      randomResult: null
     }
   }
   
@@ -67,30 +74,38 @@ class App extends React.Component {
     console.log("Hi")
     e.preventDefault();
       searchByIngredient(this.state.ingSearch).then(results => {
-      this.setState({ ingCocktailsList: results, });
+      this.setState({ ingCocktailsList: results, showResults: 2 });
     })
   }
 
+  //handleRandomClick
+  getRandom = (e) => {
+    getRandoCocktail().then(results => {
+  
+    this.setState({ randomResult: results, showResults: 3 })
+    })
+  }
+
+  home = () => {
+    this.setState({
+      showResults: 5
+    })
+  }
 
   render() {
 
         return (
           <div>
             <Header />
-            <h2 className='heading' >Find your perfect cocktail!</h2>
+            <button className='home-button' onClick={this.home} >Clear</button>
             
             <SearchIngredient search={this.ingredientSubmitFunc} change={this.handleChangeIng} />
             <SearchName search={this.handleSubmitName} change={this.handleChangeName}/>
-            <RandomDrink />
+            <RandomDrink search={this.getRandom} />
       
-          { this.state.showResults == 1 ? 
-            <ResultsName  data={this.state.nameCocktailsList} />
-          : this.state.showResults == 2 ?             
-            <SearchIngredientResults data={this.state.ingCocktailsList} />
-            : this.state.showResults == 3 ?            
-            <p> Random </p> :
-            null
-          }      
+            { this.state.showResults == 1 && <ResultsName  data={this.state.nameCocktailsList} /> }
+            { this.state.showResults == 2 && <SearchIngredientResults data={this.state.ingCocktailsList} /> } 
+            { this.state.showResults == 3 && <RandomDrinkDisplay drink={this.state.randomResult} /> }      
             <Footer />
       
           </div>)
