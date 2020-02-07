@@ -17,7 +17,9 @@ export function getRandoCocktail() {
   return request
     .get(cocktails+ 'random.php')
     .then(response => response.body)
+
 }
+
 
 export function getCocktailByName(name) {
   return request

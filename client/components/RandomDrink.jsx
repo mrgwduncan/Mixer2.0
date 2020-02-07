@@ -24,7 +24,7 @@ handleOnClick = e => {
 
   render() {
     return (
-      <div>
+      <div className="search">
         <button onClick={this.handleOnClick}>
           Random Cocktail!</button>
 

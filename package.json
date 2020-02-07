@@ -11,6 +11,7 @@
     "dev": "nodemon server",
     "dev:client": "webpack --watch",
     "dev:server": "nodemon server",
+    "devmac": "nodemon server & webpack --watch",
     "start": "run-s build server",
     "build": "webpack",
     "server": "node server",
