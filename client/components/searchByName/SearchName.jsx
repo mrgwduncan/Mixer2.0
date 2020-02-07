@@ -16,19 +16,7 @@ class SearchName extends React.Component {
     }
   }
 
-  handleSubmit = (e) => {
-    console.log("Submitted.")
-    e.preventDefault();
-    getCocktailByName(this.state.searchTerm)
-    .then(cocktails => {
-      console.log(cocktails)
-      this.setState({
-        currentCocktails: cocktails,
-        drinksFound: true
-      })
-    })
-
-  }
+  
 
   handleChange = (e) => {
     //console.log('change!')

@@ -18,6 +18,8 @@ export function getRandoCocktail() {
     .then(response => response.body)
 
 }
+
+
 export function getCocktailByName(name) {
   return request
     .get(cocktails + 'search.php?s=' + name)

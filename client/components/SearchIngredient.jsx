@@ -15,12 +15,7 @@ class SearchIngredient extends React.Component {
       [e.target.name]: e.target.value
     });
   };
-  handleSubmit = e => {
-    e.preventDefault();
-      searchByIngredient(this.state.ingredient).then(results => {
-      this.setState({ drinks: results, });
-    });
-  };
+  
   render() {
     return (
       <div className="search">
