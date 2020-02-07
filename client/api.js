@@ -6,6 +6,7 @@ export function searchByIngredient(ingredient) {
     .get(cocktails + "filter.php?i=" + ingredient)
     .then(response => response.body);
 }
+
 export function getCocktailbyId(id) {
   return request
     .get(cocktails + "lookup.php?i=" + id)
