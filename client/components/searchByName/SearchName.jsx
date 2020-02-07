@@ -16,29 +16,18 @@ class SearchName extends React.Component {
     }
   }
 
-  
-
-  handleChange = (e) => {
-    //console.log('change!')
-    this.setState({
-      searchTerm: e.target.value
-    })
-  }
-
   render() {
 
     return(
       <React.Fragment>
         <div className="search">
-          <form onSubmit={this.handleSubmit}>  
+          <form onSubmit={this.props.search}>  
             <label> Search by name: &nbsp; </label>
-            <input type="text" name="cname" placeholder="Enter Name" onChange={this.handleChange} />
+            <input type="text" name="cname" placeholder="Enter Name" onChange={this.props.change} />
             <input type="submit"  />
           </form>
         </div>
-        {this.state.drinksFound && (
-          <ResultsName data={this.state.currentCocktails} />
-        )}
+
       </React.Fragment>
       
     )
