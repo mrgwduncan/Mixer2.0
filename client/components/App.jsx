@@ -10,6 +10,8 @@ import SearchName from './searchByName/SearchName.jsx'
 import {getCocktailByName} from '../api.js'
 import ResultsName from './searchByName/ResultsName.jsx'
 
+import {searchByIngredient} from '../api.js'
+
 class App extends React.Component {
   constructor(props) {
     super(props)
@@ -26,6 +28,8 @@ class App extends React.Component {
 
       //ingredient state properties
       ingredientResult: null,
+      ingSearch: '',
+      ingCocktailsList: null
     }
   }
   
@@ -51,13 +55,21 @@ class App extends React.Component {
     })
   }
 
+  //change
+  handleChangeIng = (e) => {
+    this.setState({
+      ingSearch: e.target.value
+    });
+  };
 
-    ingredientSubmitFunc = () => {handleSubmitIng = e => {
-      e.preventDefault();
-        searchByIngredient(this.state.ingredient).then(results => {
-        this.setState({ drinks: results, });
-      })
-    }}
+  //search
+  ingredientSubmitFunc = (e) => {
+    console.log("Hi")
+    e.preventDefault();
+      searchByIngredient(this.state.ingSearch).then(results => {
+      this.setState({ ingCocktailsList: results, });
+    })
+  }
 
 
   render() {
@@ -67,14 +79,14 @@ class App extends React.Component {
             <Header />
             <h2 className='heading' >Find your perfect cocktail!</h2>
             
-            <SearchIngredient search={this.state.ingredientSubmitFunc} />
+            <SearchIngredient search={this.ingredientSubmitFunc} change={this.handleChangeIng} />
             <SearchName search={this.handleSubmitName} change={this.handleChangeName}/>
             <RandomDrink />
       
           { this.state.showResults == 1 ? 
             <ResultsName  data={this.state.nameCocktailsList} />
           : this.state.showResults == 2 ?             
-            <p> Ingredient </p>
+            <SearchIngredientResults data={this.state.ingCocktailsList} />
             : this.state.showResults == 3 ?            
             <p> Random </p> :
             null

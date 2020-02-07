@@ -15,23 +15,30 @@ class SearchIngredient extends React.Component {
       [e.target.name]: e.target.value
     });
   };
-  
+
+  //change
+
+
+  //search
+  handleSubmit = e => {
+    e.preventDefault();
+      searchByIngredient(this.state.ingredient).then(results => {
+      this.setState({ drinks: results, });
+    });
+  };
   render() {
     return (
       <div className="search">
-        <form action="/" method="POST" onSubmit={this.handleSubmit}>
+        <form  onSubmit={this.props.search}>
           <label>Search by ingredient: &nbsp; </label>
           <input
             type="text"
             name="ingredient"
             placeholder="enter ingredient "
-            onChange={this.handleChange}
+            onChange={this.props.change}
           ></input>
           <input type="submit" value="submit" />
         </form>
-        {this.state.drinks && (
-          <SearchIngredientResults data={this.state.drinks} />
-        )}
       </div>
     );
   }
