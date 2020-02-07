@@ -13,6 +13,7 @@
     "dev:server": "nodemon server",
     "devmac": "nodemon server & webpack --watch",
     "start": "run-s build server",
+    "start2": "node server",
     "build": "webpack",
     "server": "node server",
     "test": "jest --watchAll"
