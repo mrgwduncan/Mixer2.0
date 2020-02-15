@@ -4,8 +4,8 @@ import React from 'react'
 function Header () {
     return (
       <div className='header'>
-         <img className="logo"src="/images/black-logo.png" alt="logo" />
-        <p>The Mixer!</p>
+        <p className='drop'>Mix mix, swirl mix</p>
+        <p>find a cocktail and enjoy</p>
         </div>
       
     )

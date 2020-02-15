@@ -1,0 +1,2 @@
+Each different type of search needs to return results to the search gobal state for the 
+search results page to be uniform. 

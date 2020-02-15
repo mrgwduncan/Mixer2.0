@@ -1,24 +1,43 @@
 import React, { Component } from "react";
-function DrinkResults(props) {
-  return (
-    <div>
-      <div className="">
-        <h2>{props.name}</h2>
-        <p>{props.category}</p>
-        <p>{props.glass}</p>
-        <p>{props.instructions}</p>
-        <ul>
-          {props.ingredients.map(results => (
-            <li>
-              {results.ing} : {results.measure}
-            </li>
-          ))}
-        </ul>
+import { fetchById } from "../actions";
+import { connect } from "react-redux";
+
+class DrinkResults extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  componentWillMount() {
+    this.props.dispatch(fetchById(this.props.id));
+  }
+  render() {
+    console.log(this.props.cocktail.ingredients);
+    return (
+      <div className="drinkresults">
+        {this.props.cocktail.strDrink && (
+          <div className="drinkcontainer">
+            <h2>{this.props.cocktail.strDrink}</h2>
+            <p>{this.props.cocktail.strCategory}</p>
+            <p>{this.props.cocktail.strGlass}</p>
+            <p>{this.props.cocktail.strInstructions}</p>
+            <ul>
+              {this.props.cocktail.ingredients.map(results => (
+                <li>
+                  {results.ing} : {results.measure}
+                </li>
+              ))}
+            </ul>
+            <img src={this.props.cocktail.strDrinkThumb}></img>
+          </div>
+        )}
       </div>
-      <div className="">
-        <img src={props.image}></img>
-      </div>
-    </div>
-  );
+    );
+  }
 }
-export default DrinkResults;
+function mapStateToProps(state) {
+  return {
+    id: state.indentifier,
+    cocktail: state.cocktail
+  };
+}
+
+export default connect(mapStateToProps)(DrinkResults);
