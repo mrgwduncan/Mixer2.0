@@ -90,7 +90,7 @@
 /*!*********************************!*\
   !*** ./client/actions/index.js ***!
   \*********************************/
-/*! exports provided: UPDATE_CONTROL, UPDATE_SEARCHRESULTS, SET_INGREDIENT, SET_INDENTIFIER, UPDATE_COCKTAIL, SET_NAME, SET_CATAGORY, SET_TYPE, SET_FIRST, SET_SELECTED, SET_RANDOMONE, SET_RANDOMTWO, SET_RANDOMTHREE, updateControl, setIndentifier, fetchByIngredient, fetchByCatagory, fetchByType, fetchByFirst, fetchByName, setDrinks, fetchById, setCocktail, updateSearchResults, setIngredient, setName, setCatagory, setType, setFirst, setSelected, setRandom, setRandomOne, setRandomTwo, setRandomThree, fetchRandom */
+/*! exports provided: UPDATE_CONTROL, UPDATE_SEARCHRESULTS, SET_INGREDIENT, SET_INDENTIFIER, UPDATE_COCKTAIL, SET_NAME, SET_CATAGORY, SET_TYPE, SET_FIRST, SET_SELECTED, SET_RANDOMONE, SET_RANDOMTWO, SET_RANDOMTHREE, SET_RANDOM, updateControl, setIndentifier, fetchByIngredient, fetchByCatagory, fetchByType, fetchByFirst, fetchByName, setDrinks, fetchById, setCocktail, updateSearchResults, setIngredient, setName, setCatagory, setType, setFirst, setSelected, setRandom, setRandomOne, setRandomTwo, setRandomThree, fetchRandom */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -108,6 +108,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_RANDOMONE", function() { return SET_RANDOMONE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_RANDOMTWO", function() { return SET_RANDOMTWO; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_RANDOMTHREE", function() { return SET_RANDOMTHREE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_RANDOM", function() { return SET_RANDOM; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateControl", function() { return updateControl; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setIndentifier", function() { return setIndentifier; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchByIngredient", function() { return fetchByIngredient; });
@@ -148,6 +149,7 @@ var SET_SELECTED = "SET_SELECTED";
 var SET_RANDOMONE = "SET_RANDOMONE";
 var SET_RANDOMTWO = "SET_RANDOMTWO";
 var SET_RANDOMTHREE = "SET_RANDOMTHREE";
+var SET_RANDOM = "SET_RANDOM";
 function updateControl(_int) {
   return {
     type: UPDATE_CONTROL,
@@ -285,7 +287,10 @@ function fetchRandom(_int3) {
   if (_int3 == 0) {
     return function (dispatch) {
       return Object(_api__WEBPACK_IMPORTED_MODULE_1__["getRandomCocktail"])(_int3).then(function (data) {
-        return dispatch(setRandomOne(data));
+        console.log(data.drinks[0].idDrink);
+        dispatch(setRandom(data));
+        dispatch(setIndentifier(data.drinks[0].idDrink));
+        return dispatch(updateControl(3));
       });
     };
   }
@@ -673,7 +678,6 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
-      console.log(this.props.cocktail.ingredients);
       return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
         className: "drinkresults"
       }, this.props.cocktail.strDrink && react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
@@ -1006,8 +1010,6 @@ function (_React$Component) {
   _createClass(SearchResults, [{
     key: "componentDidMount",
     value: function componentDidMount() {
-      console.log();
-
       switch (this.props.type) {
         case "ingredient":
           this.props.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["fetchByIngredient"])(this.props.selected));
@@ -1085,34 +1087,86 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
 
 
-var Nav = function Nav(props) {
-  var handleClickSearch = function handleClickSearch(e) {
-    if (props.control === 0) {
-      props.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["updateControl"])(1));
-    } else {
-      props.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["updateControl"])(0));
+
+var Nav =
+/*#__PURE__*/
+function (_React$Component) {
+  _inherits(Nav, _React$Component);
+
+  function Nav(props) {
+    var _this;
+
+    _classCallCheck(this, Nav);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(Nav).call(this, props));
+
+    _defineProperty(_assertThisInitialized(_this), "handleClickSearch", function (e) {
+      if (_this.props.control === 0) {
+        _this.props.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["updateControl"])(1));
+      } else {
+        _this.props.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["updateControl"])(0));
+      }
+    });
+
+    _defineProperty(_assertThisInitialized(_this), "handleClickRandom", function (e) {
+      _this.props.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["fetchRandom"])(0));
+
+      _this.forceUpdate();
+    });
+
+    return _this;
+  }
+
+  _createClass(Nav, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {}
+  }, {
+    key: "render",
+    value: function render() {
+      return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
+        className: "nav"
+      }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "navbutton"
+      }, "Share"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "navbutton",
+        onClick: this.handleClickRandom
+      }, "Randon Cocktail"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
+        className: "navbuttonsearch",
+        onClick: this.handleClickSearch
+      }, "Search"));
     }
-  };
+  }]);
 
-  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("div", {
-    className: "nav"
-  }, react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "navbutton"
-  }, "Share"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "navbutton"
-  }, "Randon Cocktail"), react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("button", {
-    className: "navbuttonsearch",
-    onClick: handleClickSearch
-  }, "Search"));
-};
+  return Nav;
+}(react__WEBPACK_IMPORTED_MODULE_0___default.a.Component);
 
 function mapStateToProps(state) {
   return {
-    control: state.control
+    control: state.control,
+    random: state.random
   };
 }
 
@@ -1261,9 +1315,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _cocktail__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./cocktail */ "./client/reducers/cocktail.js");
 /* harmony import */ var _type__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./type */ "./client/reducers/type.js");
 /* harmony import */ var _selected__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./selected */ "./client/reducers/selected.js");
-/* harmony import */ var _randomCocktailOne__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./randomCocktailOne */ "./client/reducers/randomCocktailOne.js");
-/* harmony import */ var _randomCocktailTwo__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./randomCocktailTwo */ "./client/reducers/randomCocktailTwo.js");
-/* harmony import */ var _randomCocktailThree__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./randomCocktailThree */ "./client/reducers/randomCocktailThree.js");
+/* harmony import */ var _random__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./random */ "./client/reducers/random.js");
+/* harmony import */ var _randomCocktailOne__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./randomCocktailOne */ "./client/reducers/randomCocktailOne.js");
+/* harmony import */ var _randomCocktailTwo__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./randomCocktailTwo */ "./client/reducers/randomCocktailTwo.js");
+/* harmony import */ var _randomCocktailThree__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./randomCocktailThree */ "./client/reducers/randomCocktailThree.js");
+
 
 
 
@@ -1281,11 +1337,46 @@ var reducers = Object(redux__WEBPACK_IMPORTED_MODULE_0__["combineReducers"])({
   cocktail: _cocktail__WEBPACK_IMPORTED_MODULE_4__["default"],
   type: _type__WEBPACK_IMPORTED_MODULE_5__["default"],
   selected: _selected__WEBPACK_IMPORTED_MODULE_6__["default"],
-  randomCocktailOne: _randomCocktailOne__WEBPACK_IMPORTED_MODULE_7__["default"],
-  randomCocktailTwo: _randomCocktailTwo__WEBPACK_IMPORTED_MODULE_8__["default"],
-  randomCocktailThree: _randomCocktailThree__WEBPACK_IMPORTED_MODULE_9__["default"]
+  randomCocktailOne: _randomCocktailOne__WEBPACK_IMPORTED_MODULE_8__["default"],
+  randomCocktailTwo: _randomCocktailTwo__WEBPACK_IMPORTED_MODULE_9__["default"],
+  randomCocktailThree: _randomCocktailThree__WEBPACK_IMPORTED_MODULE_10__["default"],
+  random: _random__WEBPACK_IMPORTED_MODULE_7__["default"]
 });
 /* harmony default export */ __webpack_exports__["default"] = (reducers);
+
+/***/ }),
+
+/***/ "./client/reducers/random.js":
+/*!***********************************!*\
+  !*** ./client/reducers/random.js ***!
+  \***********************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
+
+var initialState = {
+  drinks: [{
+    strDrink: ""
+  }]
+};
+
+var Reducer = function Reducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments.length > 1 ? arguments[1] : undefined;
+
+  switch (action.type) {
+    case _actions__WEBPACK_IMPORTED_MODULE_0__["SET_RANDOM"]:
+      return action.random;
+
+    default:
+      return state;
+  }
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Reducer);
 
 /***/ }),
 

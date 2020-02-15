@@ -9,7 +9,7 @@ class SearchResults extends React.Component {
     super(props);
   }
   componentDidMount() {
-    console.log()
+
     switch (this.props.type) {
       case "ingredient":
         this.props.dispatch(fetchByIngredient(this.props.selected))

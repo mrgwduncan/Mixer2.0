@@ -6,9 +6,10 @@ import indentifier from "./indentifier";
 import cocktail from "./cocktail";
 import type from "./type";
 import selected from "./selected";
-import randomCocktailOne from "./randomCocktailOne"
-import randomCocktailTwo from "./randomCocktailTwo"
-import randomCocktailThree from "./randomCocktailThree"
+import random from "./random";
+import randomCocktailOne from "./randomCocktailOne";
+import randomCocktailTwo from "./randomCocktailTwo";
+import randomCocktailThree from "./randomCocktailThree";
 const reducers = combineReducers({
   search,
   control,
@@ -18,7 +19,8 @@ const reducers = combineReducers({
   selected,
   randomCocktailOne,
   randomCocktailTwo,
-  randomCocktailThree
+  randomCocktailThree,
+  random
 });
 
 export default reducers;

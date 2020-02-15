@@ -22,6 +22,7 @@ export const SET_SELECTED = "SET_SELECTED";
 export const SET_RANDOMONE = "SET_RANDOMONE";
 export const SET_RANDOMTWO = "SET_RANDOMTWO";
 export const SET_RANDOMTHREE = "SET_RANDOMTHREE";
+export const SET_RANDOM = "SET_RANDOM";
 
 export function updateControl(int) {
   return {
@@ -163,7 +164,10 @@ export function fetchRandom(int) {
   if (int == 0) {
     return dispatch => {
       return getRandomCocktail(int).then(data => {
-        return dispatch(setRandomOne(data));
+        console.log(data.drinks[0].idDrink)
+        dispatch(setRandom(data));
+        dispatch(setIndentifier(data.drinks[0].idDrink));
+        return dispatch(updateControl(3));
       });
     };
   }

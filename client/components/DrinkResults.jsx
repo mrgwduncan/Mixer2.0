@@ -10,7 +10,6 @@ class DrinkResults extends React.Component {
     this.props.dispatch(fetchById(this.props.id));
   }
   render() {
-    console.log(this.props.cocktail.ingredients);
     return (
       <div className="drinkresults">
         {this.props.cocktail.strDrink && (
