@@ -90,7 +90,7 @@
 /*!*********************************!*\
   !*** ./client/actions/index.js ***!
   \*********************************/
-/*! exports provided: UPDATE_CONTROL, UPDATE_SEARCHRESULTS, SET_INGREDIENT, SET_INDENTIFIER, UPDATE_COCKTAIL, SET_NAME, SET_CATAGORY, SET_TYPE, SET_FIRST, SET_SELECTED, SET_RANDOMONE, SET_RANDOMTWO, SET_RANDOMTHREE, SET_RANDOM, updateControl, setIndentifier, fetchByIngredient, fetchByCatagory, fetchByType, fetchByFirst, fetchByName, setDrinks, fetchById, setCocktail, updateSearchResults, setIngredient, setName, setCatagory, setType, setFirst, setSelected, setRandom, setRandomOne, setRandomTwo, setRandomThree, fetchRandom */
+/*! exports provided: UPDATE_CONTROL, UPDATE_SEARCHRESULTS, SET_INGREDIENT, SET_INDENTIFIER, UPDATE_COCKTAIL, SET_NAME, SET_CATAGORY, SET_TYPE, SET_FIRST, SET_SELECTED, SET_RANDOMONE, SET_RANDOMTWO, SET_RANDOMTHREE, SET_RANDOM, CLEAR_SEARCHRESULTS, updateControl, fetchByIngredient, fetchByCatagory, fetchByType, fetchByFirst, fetchByName, setDrinks, fetchById, setCocktail, updateSearchResults, setIngredient, setName, setCatagory, setType, setFirst, setSelected, setRandom, setRandomOne, setRandomTwo, setRandomThree, fetchRandom, clearSearch */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -109,8 +109,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_RANDOMTWO", function() { return SET_RANDOMTWO; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_RANDOMTHREE", function() { return SET_RANDOMTHREE; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SET_RANDOM", function() { return SET_RANDOM; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CLEAR_SEARCHRESULTS", function() { return CLEAR_SEARCHRESULTS; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateControl", function() { return updateControl; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setIndentifier", function() { return setIndentifier; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchByIngredient", function() { return fetchByIngredient; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchByCatagory", function() { return fetchByCatagory; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchByType", function() { return fetchByType; });
@@ -131,6 +131,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setRandomTwo", function() { return setRandomTwo; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setRandomThree", function() { return setRandomThree; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "fetchRandom", function() { return fetchRandom; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clearSearch", function() { return clearSearch; });
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! superagent */ "./node_modules/superagent/lib/client.js");
 /* harmony import */ var superagent__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(superagent__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _api__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../api */ "./client/api.js");
@@ -150,18 +151,13 @@ var SET_RANDOMONE = "SET_RANDOMONE";
 var SET_RANDOMTWO = "SET_RANDOMTWO";
 var SET_RANDOMTHREE = "SET_RANDOMTHREE";
 var SET_RANDOM = "SET_RANDOM";
+var CLEAR_SEARCHRESULTS = "CLEAR_SEARCHRESULTS";
 function updateControl(_int) {
   return {
     type: UPDATE_CONTROL,
     result: _int
   };
 }
-var setIndentifier = function setIndentifier(id) {
-  return {
-    type: SET_INDENTIFIER,
-    indentifier: id
-  };
-};
 function fetchByIngredient(obj) {
   return function (dispatch) {
     return Object(_api__WEBPACK_IMPORTED_MODULE_1__["getByIngredient"])(obj).then(function (data) {
@@ -287,9 +283,8 @@ function fetchRandom(_int3) {
   if (_int3 == 0) {
     return function (dispatch) {
       return Object(_api__WEBPACK_IMPORTED_MODULE_1__["getRandomCocktail"])(_int3).then(function (data) {
-        console.log(data.drinks[0].idDrink);
         dispatch(setRandom(data));
-        dispatch(setIndentifier(data.drinks[0].idDrink));
+        dispatch(fetchById(data.drinks[0].idDrink));
         return dispatch(updateControl(3));
       });
     };
@@ -318,6 +313,11 @@ function fetchRandom(_int3) {
       });
     };
   }
+}
+function clearSearch() {
+  return {
+    type: CLEAR_SEARCHRESULTS
+  };
 }
 
 /***/ }),
@@ -511,8 +511,8 @@ function mapStateToProps(state) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
+/* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -537,8 +537,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
-
 var DisplayImage =
 /*#__PURE__*/
 function (_React$Component) {
@@ -552,9 +550,9 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(DisplayImage).call(this, props));
 
     _defineProperty(_assertThisInitialized(_this), "handleOnClick", function (id) {
-      _this.props.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["setIndentifier"])(id));
+      _this.props.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["fetchById"])(id));
 
-      _this.props.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["updateControl"])(3));
+      _this.props.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["updateControl"])(3));
     });
 
     _defineProperty(_assertThisInitialized(_this), "displayDrinks", function () {
@@ -589,15 +587,15 @@ function (_React$Component) {
     key: "componentDidMount",
     value: function componentDidMount() {
       if (this.props.randomOne.drinks[0].strDrink.length == 0) {
-        this.props.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["fetchRandom"])(1));
+        this.props.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["fetchRandom"])(1));
       }
 
       if (this.props.randomTwo.drinks[0].strDrink.length == 0) {
-        this.props.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["fetchRandom"])(2));
+        this.props.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["fetchRandom"])(2));
       }
 
       if (this.props.randomThree.drinks[0].strDrink.length == 0) {
-        this.props.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["fetchRandom"])(3));
+        this.props.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["fetchRandom"])(3));
       }
     }
   }, {
@@ -620,7 +618,7 @@ function mapStateToProps(state) {
   };
 }
 
-/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_2__["connect"])(mapStateToProps)(DisplayImage));
+/* harmony default export */ __webpack_exports__["default"] = (Object(react_redux__WEBPACK_IMPORTED_MODULE_1__["connect"])(mapStateToProps)(DisplayImage));
 
 /***/ }),
 
@@ -672,8 +670,7 @@ function (_React$Component) {
 
   _createClass(DrinkResults, [{
     key: "componentWillMount",
-    value: function componentWillMount() {
-      this.props.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["fetchById"])(this.props.id));
+    value: function componentWillMount() {// this.props.dispatch(fetchById(this.props.id));
     }
   }, {
     key: "render",
@@ -809,6 +806,8 @@ function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handleSelectSubmit", function (e) {
       e.preventDefault();
+
+      _this.props.dispatch(_actions__WEBPACK_IMPORTED_MODULE_2__["clearSearch"]);
 
       _this.props.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["setType"])(_this.state.type));
 
@@ -983,7 +982,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
-
+;
 
 
 var SearchResults =
@@ -999,7 +998,7 @@ function (_React$Component) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(SearchResults).call(this, props));
 
     _defineProperty(_assertThisInitialized(_this), "handleOnClick", function (id) {
-      _this.props.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["setIndentifier"])(id));
+      _this.props.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["fetchById"])(id));
 
       _this.props.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_2__["updateControl"])(3));
     });
@@ -1133,8 +1132,6 @@ function (_React$Component) {
 
     _defineProperty(_assertThisInitialized(_this), "handleClickRandom", function (e) {
       _this.props.dispatch(Object(_actions__WEBPACK_IMPORTED_MODULE_1__["fetchRandom"])(0));
-
-      _this.forceUpdate();
     });
 
     return _this;
@@ -1493,6 +1490,7 @@ var Reducer = function Reducer() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _actions__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../actions */ "./client/actions/index.js");
 
+
 var initialState = {
   drinks: []
 };
@@ -1504,6 +1502,9 @@ var Reducer = function Reducer() {
   switch (action.type) {
     case _actions__WEBPACK_IMPORTED_MODULE_0__["UPDATE_SEARCHRESULTS"]:
       return action.drinks;
+
+    case _actions__WEBPACK_IMPORTED_MODULE_0__["CLEAR_SEARCHRESULTS"]:
+      return initialState;
 
     default:
       return state;

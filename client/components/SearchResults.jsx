@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { fetchByIngredient, fetchByName, fetchByCatagory, fetchByType, fetchByFirst} from "../actions";
-import { setIndentifier } from "../actions";
+import { fetchByIngredient, fetchByName, fetchByCatagory, fetchByType, fetchByFirst, fetchById} from "../actions";;
 import { updateControl } from "../actions";
 
 class SearchResults extends React.Component {
@@ -31,7 +30,7 @@ class SearchResults extends React.Component {
     }
   }
   handleOnClick = id => {
-    this.props.dispatch(setIndentifier(id));
+    this.props.dispatch(fetchById(id))
     this.props.dispatch(updateControl(3));
   };
   render() {

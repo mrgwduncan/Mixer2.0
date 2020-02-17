@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { updateControl, setSelected, setType } from "../actions";
+import { updateControl, setSelected, setType, clearSearch } from "../actions";
 
 class Search extends React.Component {
   constructor(props) {
@@ -18,6 +18,7 @@ class Search extends React.Component {
 
   handleSelectSubmit = e => {
     e.preventDefault();
+    this.props.dispatch(clearSearch)
     this.props.dispatch(setType(this.state.type));
     this.props.dispatch(setSelected(this.state.select));
     this.props.dispatch(updateControl(2));

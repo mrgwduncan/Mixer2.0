@@ -7,7 +7,7 @@ class DrinkResults extends React.Component {
     super(props);
   }
   componentWillMount() {
-    this.props.dispatch(fetchById(this.props.id));
+    // this.props.dispatch(fetchById(this.props.id));
   }
   render() {
     return (

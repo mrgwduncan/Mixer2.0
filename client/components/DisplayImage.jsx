@@ -1,8 +1,6 @@
 import React from "react";
-import { fetchRandom } from "../actions";
 import { connect } from "react-redux";
-import { setIndentifier } from "../actions";
-import { updateControl } from "../actions";
+import { updateControl, fetchById,fetchRandom} from "../actions";
 
 class DisplayImage extends React.Component {
   constructor(props) {
@@ -10,7 +8,7 @@ class DisplayImage extends React.Component {
   }
 
   handleOnClick = id => {
-    this.props.dispatch(setIndentifier(id));
+    this.props.dispatch(fetchById(id))
     this.props.dispatch(updateControl(3));
   };
 

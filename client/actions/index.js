@@ -23,6 +23,7 @@ export const SET_RANDOMONE = "SET_RANDOMONE";
 export const SET_RANDOMTWO = "SET_RANDOMTWO";
 export const SET_RANDOMTHREE = "SET_RANDOMTHREE";
 export const SET_RANDOM = "SET_RANDOM";
+export const CLEAR_SEARCHRESULTS = "CLEAR_SEARCHRESULTS"
 
 export function updateControl(int) {
   return {
@@ -30,12 +31,6 @@ export function updateControl(int) {
     result: int
   };
 }
-export const setIndentifier = id => {
-  return {
-    type: SET_INDENTIFIER,
-    indentifier: id
-  };
-};
 
 export function fetchByIngredient(obj) {
   return dispatch => {
@@ -164,9 +159,8 @@ export function fetchRandom(int) {
   if (int == 0) {
     return dispatch => {
       return getRandomCocktail(int).then(data => {
-        console.log(data.drinks[0].idDrink)
         dispatch(setRandom(data));
-        dispatch(setIndentifier(data.drinks[0].idDrink));
+        dispatch(fetchById(data.drinks[0].idDrink))
         return dispatch(updateControl(3));
       });
     };
@@ -192,5 +186,11 @@ export function fetchRandom(int) {
         return dispatch(setRandomThree(data));
       });
     };
+  }
+}
+
+export function clearSearch() { 
+  return {
+    type: CLEAR_SEARCHRESULTS
   }
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { updateControl, fetchRandom, setIndentifier } from "../actions";
+import { updateControl, fetchRandom, } from "../actions";
 import { connect } from "react-redux";
 
 class Nav extends React.Component {
@@ -18,7 +18,6 @@ class Nav extends React.Component {
   };
   handleClickRandom = e => {
     this.props.dispatch(fetchRandom(0))
-    this.forceUpdate()
   };
   render() {
     return (
